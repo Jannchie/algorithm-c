@@ -1,11 +1,10 @@
+#include "util.h"
+
 /**
  * @name: 冒泡排序
  * @author: Jannchie
  * @date: 2019-10-22
  * */
-
-#include "util.h"
-
 void bubbleSort(int a[], int len)
 {
     // i为每轮冒泡的目标位置
@@ -22,4 +21,13 @@ void bubbleSort(int a[], int len)
             }
         }
     }
+}
+
+/**
+ * @name: 强化冒泡排序
+ * @author: Jannchie
+ * @date: 2019-10-22
+ * */
+void optimized_bubbleSort(int a[], int len)
+{
 }
