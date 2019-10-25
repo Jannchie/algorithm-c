@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void swap(int *a, int *b)
 {
@@ -23,20 +24,46 @@ int isAsc(int *a, int len)
     {
         if (a[i - 1] > a[i])
         {
-            printf("[ERROR]\t\t Not Sort By Asc\n");
+            printf("[ERROR]\t\tNot Sort By Asc\n");
+            printArray(a, len);
             return 0;
         }
     }
-    printf("[PASS]\t\t Array Sort By Asc\n");
+    printf("[PASS]\t\tArray Sort By Asc\n");
     return 1;
 }
 
 void getRandomArray(int *a, int len)
 {
-    printf("[START]\t\t Creating Random Array\n");
     for (int i = 0; i < len; i++)
     {
         a[i] = rand();
     }
-    printf("[OK]\t\t Created Random Array\n");
+}
+void getSortedArray(int *a, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        a[i] = i + 1;
+    }
+}
+
+void runSort(void (*sortFunction)(int[], int), int len, int times)
+{
+    // printf("[INFO]\t\t\"%s\" started\n");
+    int a[len];
+
+    clock_t start, end;
+    start = clock();
+
+    while (times--)
+    {
+        getRandomArray(a, len);
+        // 执行排序算法
+        sortFunction(a, len);
+    }
+
+    end = clock();
+    printf("[INFO]\t\tused time = %3f\n", (double)(end - start) / CLOCKS_PER_SEC);
+    isAsc(a, len);
 }
