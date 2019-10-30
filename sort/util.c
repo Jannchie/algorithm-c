@@ -24,12 +24,12 @@ int isAsc(int *a, int len)
     {
         if (a[i - 1] > a[i])
         {
-            printf("[ERROR]\t\tNot Sort By Asc\n");
+            printf("============== TEST ERROR ==============\n");
+            printf("============ Not Sort By Asc ===========\n");
             printArray(a, len);
             return 0;
         }
     }
-    printf("[PASS]\t\tArray Sort By Asc\n");
     return 1;
 }
 
@@ -48,7 +48,7 @@ void getSortedArray(int *a, int len)
     }
 }
 
-void runSort(void (*sortFunction)(int[], int), int len, int times)
+void runSort(char name[], void (*sortFunction)(int[], int), int len, int times)
 {
     // printf("[INFO]\t\t\"%s\" started\n");
     int a[len];
@@ -64,6 +64,6 @@ void runSort(void (*sortFunction)(int[], int), int len, int times)
     }
 
     end = clock();
-    printf("[INFO]\t\tused time = %3f\n", (double)(end - start) / CLOCKS_PER_SEC);
+    printf("[%s]\tused time = %f\n", name, (double)(end - start) / CLOCKS_PER_SEC);
     isAsc(a, len);
 }
