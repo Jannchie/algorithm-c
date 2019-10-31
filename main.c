@@ -4,13 +4,15 @@
 
 int main(int argc, char const *argv[])
 {
-    int len = 10000;
-    int times = 500;
+    int len = 100000;
+    int times = 100;
     printf("============== TEST START ==============\n");
-    runSort("Select Sort", selectSort, len, times);
-    runSort("Bubble Sort", bubbleSort, len, times);
-    runSort("Insert Sort", insertSort, len, times);
+    // runSort("Select Sort", selectSort, len, times);
+    // runSort("Bubble Sort", bubbleSort, len, times);
+    // runSort("Insert Sort", insertSort, len, times);
     runSort("Quick  Sort", quickSort, len, times);
+    // runSort("Quick3 Sort", quickSortMidian3, len, times);
+    runSort("Merge  Sort", mergeSort, len, times);
     printf("==============  TEST END  ==============\n");
     return 0;
 }

@@ -48,7 +48,7 @@ void getSortedArray(int *a, int len)
     }
 }
 
-void runSort(char name[], void (*sortFunction)(int[], int), int len, int times)
+void runSort(char const name[], void (*sortFunction)(int[], int), int len, int times)
 {
     // printf("[INFO]\t\t\"%s\" started\n");
     int a[len];
