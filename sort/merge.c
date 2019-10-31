@@ -5,7 +5,7 @@ void merge(int a[], int left, int mid, int right, int p[])
     int k = 0;
     while (i <= mid && j <= right)
     {
-        (a[i] < a[j]) ? p[k++] = a[i++] : p[k++] = a[j++];
+        p[k++] = (a[i] < a[j]) ? a[i++] : a[j++];
     }
     while (i <= mid)
     {
