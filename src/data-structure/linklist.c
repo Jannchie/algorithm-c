@@ -8,6 +8,18 @@ LinkListNode *createNewLinklistNode(int val)
     return new;
 }
 
+void printLinkList(LinkListNode *head)
+{
+    while (head != NULL)
+    {
+    }
+}
+
+/**
+ * 头部插入
+ * 循环操作
+ * 缺点是需要判断头结点为空
+ */
 LinkListNode *headInsert(LinkListNode *head, int val)
 {
     LinkListNode *new = createNewLinklistNode(val);
@@ -15,6 +27,11 @@ LinkListNode *headInsert(LinkListNode *head, int val)
     return new;
 }
 
+/**
+ * 朴素尾部插入
+ * 循环操作
+ * 缺点是需要判断头结点为空
+ */
 LinkListNode *tailInsert(LinkListNode *head, int val)
 {
     LinkListNode *new = createNewLinklistNode(val);
@@ -29,6 +46,25 @@ LinkListNode *tailInsert(LinkListNode *head, int val)
     temp->next = new;
     return head;
 }
+
+/**
+ * 递归尾部插入
+ */
+LinkListNode *tailInsertRecursion(LinkListNode *head, int val)
+{
+    if (head == NULL)
+        return createNewLinklistNode(val);
+
+    LinkListNode *temp = head;
+
+    if (temp->next == NULL)
+    {
+        temp->next = createNewLinklistNode(val);
+        return head;
+    }
+    tailInsertRecursion(temp->next, val);
+}
+
 void testLinklist()
 {
     LinkListNode *n = createNewLinklistNode(1);
