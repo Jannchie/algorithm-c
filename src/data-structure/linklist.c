@@ -109,6 +109,29 @@ LinkListNode *creatSortedLinklist(int len)
     return head;
 }
 
+/**
+ * 顺序插入链表 - 循环
+ * 构造一个虚拟头结点，值为最小值。
+ * 这样就可以将头部插入情况转换为中间插入情况，且无需考虑空链表插入。
+ */
+LinkListNode *insertSortedLinklist(LinkListNode *head, int val)
+{
+    LinkListNode *newNode = createLinklistNode(val);
+    LinkListNode *tempHead = createLinklistNode(0); // 虚拟头结点
+    tempHead->next = head;                          //指向原头结点
+    LinkListNode *temp = tempHead;
+    // 寻找插入点
+    while (temp->next != NULL && temp->next->val < val)
+    {
+        temp = temp->next;
+    }
+    // 插入
+    newNode->next = temp->next;
+    temp->next = newNode;
+    // 返回临时结点的下一个结点，因为头结点可能会变动
+    return tempHead->next;
+}
+
 void testLinklist()
 {
     LinkListNode *l = createRandomLinklist(3);
@@ -125,5 +148,9 @@ void testLinklist()
 
     printf("[创建顺序链表] ");
     l = creatSortedLinklist(5);
+    printLinkList(l);
+
+    printf("[顺序插入链表]");
+    l = insertSortedLinklist(l, 20);
     printLinkList(l);
 }
