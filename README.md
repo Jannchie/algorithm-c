@@ -12,7 +12,7 @@
 #在项目根目录执行下列bash脚本即可运行
 mkdir dist dist/data-structure dist/sort
 make
-./dist/mc-algorithm
+./dist/c-algorithm
 ```
 
 ## 目录
