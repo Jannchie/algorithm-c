@@ -21,26 +21,6 @@ void printLinkList(LinkListNode *head)
 }
 
 /**
- * 创建定长随机链表
- */
-LinkListNode *createRandomLinklist(int len)
-{
-    if (len <= 0)
-    {
-        return NULL;
-    }
-    LinkListNode *head = createLinklistNode(rand());
-    int i = 1;
-    while (i++ < len)
-    {
-        LinkListNode *temp = createLinklistNode(rand());
-        temp->next = head;
-        head = temp;
-    }
-    return head;
-}
-
-/**
  * 头部插入
  * 循环操作
  * 缺点是需要判断头结点为空
@@ -90,9 +70,47 @@ LinkListNode *tailInsertRecursion(LinkListNode *head, int val)
     tailInsertRecursion(temp->next, val);
 }
 
+/**
+ * 创建定长随机链表
+ */
+LinkListNode *createRandomLinklist(int len)
+{
+    if (len <= 0)
+    {
+        return NULL;
+    }
+    LinkListNode *head = createLinklistNode(rand());
+    int i = 1;
+    while (i++ < len)
+    {
+        LinkListNode *temp = createLinklistNode(rand());
+        temp->next = head;
+        head = temp;
+    }
+    return head;
+}
+
+/**
+ * 创建定长顺序链表
+ */
+LinkListNode *creatSortedLinklist(int len)
+{
+    int val = rand() % 10;
+    if (len <= 0)
+    {
+        return NULL;
+    }
+    LinkListNode *head = createLinklistNode(val += rand() % 10);
+    int i = 1;
+    while (i++ < len)
+    {
+        head = tailInsert(head, val += rand() % 10);
+    }
+    return head;
+}
+
 void testLinklist()
 {
-    LinkListNode *l = createRandomLinklist(5);
-    l = headInsert(l, 1);
+    LinkListNode *l = creatSortedLinklist(5);
     printLinkList(l);
 }
