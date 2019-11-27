@@ -79,11 +79,11 @@ LinkListNode *createRandomLinklist(int len)
     {
         return NULL;
     }
-    LinkListNode *head = createLinklistNode(rand());
+    LinkListNode *head = createLinklistNode(rand() % 100);
     int i = 1;
     while (i++ < len)
     {
-        LinkListNode *temp = createLinklistNode(rand());
+        LinkListNode *temp = createLinklistNode(rand() % 100);
         temp->next = head;
         head = temp;
     }
@@ -111,6 +111,19 @@ LinkListNode *creatSortedLinklist(int len)
 
 void testLinklist()
 {
-    LinkListNode *l = creatSortedLinklist(5);
+    LinkListNode *l = createRandomLinklist(3);
+    printf("[创建随机链表] ");
+    printLinkList(l);
+
+    l = headInsert(l, -1);
+    printf("[链表头插] ");
+    printLinkList(l);
+
+    l = tailInsert(l, -2);
+    printf("[链表尾插] ");
+    printLinkList(l);
+
+    printf("[创建顺序链表] ");
+    l = creatSortedLinklist(5);
     printLinkList(l);
 }
