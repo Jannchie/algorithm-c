@@ -12,7 +12,7 @@ void insertSort(int a[], int len)
         if (a[i] < a[i - 1])
         {
             int temp = a[i], j;
-            for (j = i - 1; j >= 0 && a[j] > temp; j--)
+            for (j = i - 1; j > 0 && a[j] > temp; j--)
             {
                 a[j + 1] = a[j];
             }

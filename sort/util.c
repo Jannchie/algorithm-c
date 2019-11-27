@@ -26,7 +26,6 @@ int isAsc(int *a, int len)
         {
             printf("============== TEST ERROR ==============\n");
             printf("============ Not Sort By Asc ===========\n");
-            printArray(a, len);
             return 0;
         }
     }
