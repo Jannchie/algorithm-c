@@ -1,6 +1,6 @@
 #include "linklist.h"
 
-LinkListNode *createNewLinklistNode(int val)
+LinkListNode *createLinklistNode(int val)
 {
     LinkListNode *new = (LinkListNode *)malloc(sizeof(LinkListNode));
     new->next = NULL;
@@ -21,13 +21,33 @@ void printLinkList(LinkListNode *head)
 }
 
 /**
+ * 创建定长随机链表
+ */
+LinkListNode *createRandomLinklist(int len)
+{
+    if (len <= 0)
+    {
+        return NULL;
+    }
+    LinkListNode *head = createLinklistNode(rand());
+    int i = 1;
+    while (i++ < len)
+    {
+        LinkListNode *temp = createLinklistNode(rand());
+        temp->next = head;
+        head = temp;
+    }
+    return head;
+}
+
+/**
  * 头部插入
  * 循环操作
  * 缺点是需要判断头结点为空
  */
 LinkListNode *headInsert(LinkListNode *head, int val)
 {
-    LinkListNode *new = createNewLinklistNode(val);
+    LinkListNode *new = createLinklistNode(val);
     new->next = head;
     return new;
 }
@@ -39,7 +59,7 @@ LinkListNode *headInsert(LinkListNode *head, int val)
  */
 LinkListNode *tailInsert(LinkListNode *head, int val)
 {
-    LinkListNode *new = createNewLinklistNode(val);
+    LinkListNode *new = createLinklistNode(val);
     LinkListNode *temp = head;
     if (head == NULL)
         return new;
@@ -58,13 +78,13 @@ LinkListNode *tailInsert(LinkListNode *head, int val)
 LinkListNode *tailInsertRecursion(LinkListNode *head, int val)
 {
     if (head == NULL)
-        return createNewLinklistNode(val);
+        return createLinklistNode(val);
 
     LinkListNode *temp = head;
 
     if (temp->next == NULL)
     {
-        temp->next = createNewLinklistNode(val);
+        temp->next = createLinklistNode(val);
         return head;
     }
     tailInsertRecursion(temp->next, val);
@@ -72,7 +92,7 @@ LinkListNode *tailInsertRecursion(LinkListNode *head, int val)
 
 void testLinklist()
 {
-    LinkListNode *n = createNewLinklistNode(1);
-    n->next = createNewLinklistNode(2);
-    printf("val: %d, next: %p\n", n->val, n->next);
+    LinkListNode *l = createRandomLinklist(5);
+    l = headInsert(l, 1);
+    printLinkList(l);
 }
