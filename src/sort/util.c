@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include <string.h>
 void swap(int *a, int *b)
 {
     int temp = *a;
@@ -24,8 +24,6 @@ int isAsc(int *a, int len)
     {
         if (a[i - 1] > a[i])
         {
-            printf("============== TEST ERROR ==============\n");
-            printf("============ Not Sort By Asc ===========\n");
             return 0;
         }
     }
@@ -63,6 +61,8 @@ void runSort(char const name[], void (*sortFunction)(int[], int), int len, int t
     }
 
     end = clock();
-    printf("[%s]\tused time = %f\n", name, (double)(end - start) / CLOCKS_PER_SEC);
-    isAsc(a, len);
+    char state[20] = "";
+    strcpy(state, isAsc(a, len) ? "\033[0;32m[ √ ]\033[0m" : "\033[0;31m[ × ]\033[0m");
+
+    printf("[%s]\tUSED TIME = %fs\t%s\n", name, (double)(end - start) / CLOCKS_PER_SEC, state);
 }
