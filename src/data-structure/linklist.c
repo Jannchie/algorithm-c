@@ -7,12 +7,17 @@ LinkListNode *createNewLinklistNode(int val)
     new->val = val;
     return new;
 }
-
+/**
+ * 打印链表
+ */
 void printLinkList(LinkListNode *head)
 {
     while (head != NULL)
     {
+        printf("%d -> ", head->val);
+        head = head->next;
     }
+    printf("NULL\n");
 }
 
 /**
