@@ -32,6 +32,7 @@ int isAsc(int *a, int len)
 
 void getRandomArray(int *a, int len)
 {
+    srand(rand());
     for (int i = 0; i < len; i++)
     {
         a[i] = rand();

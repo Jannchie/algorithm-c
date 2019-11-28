@@ -7,7 +7,7 @@ int main(int argc, char const *argv[])
 {
     int len = 10000;
     int times = 10;
-
+    srand(time(0));
     printf("=========== [数据结构 - 开始运行] ===========\n");
     printf("----------- [数    组 - 开始运行] -----------\n");
     printf("----------- [链    表 - 开始运行] -----------\n");
