@@ -118,8 +118,8 @@ LinkListNode *creatSortedLinklist(int len)
 LinkListNode *insertSortedLinklist(LinkListNode *head, int val)
 {
     LinkListNode *newNode = createLinklistNode(val);
-    LinkListNode *tempHead = createLinklistNode(0); // 虚拟头结点
-    tempHead->next = head;                          //指向原头结点
+    LinkListNode *tempHead = createLinklistNode(-__INT_MAX__); // 虚拟头结点
+    tempHead->next = head;                                     //指向原头结点
     LinkListNode *temp = tempHead;
     // 寻找插入点
     while (temp->next != NULL && temp->next->val < val)
