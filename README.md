@@ -1,8 +1,8 @@
-# algorithm-c
+# algorithm-c/c++
 
 ## 简介
 
-各种算法的实现（C语言版本）
+各种算法的实现（C/C++语言版本）
 
 目前编写了在linux环境下，适用于clang编译器的makefile文件。
 

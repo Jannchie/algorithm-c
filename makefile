@@ -3,12 +3,15 @@ src = $(wildcard src/*.c src/sort/*.c  src/data-structure/*.c)
 obj = $(patsubst %.c, %.o, $(src))  
 out := $(obj:src%=dist%)
 target = c-algorithm
-CC = clang
+CC_CPP = clang++
+CC_C = clang
 
 $(target): $(obj)  
-	$(CC) -g $(out) -o $(OUTDIR)/$(target)
+	$(CC_CPP) -g $(out) -o $(OUTDIR)/$(target)
 %.o: %.c  
-	$(CC) -g -c $< -o $(patsubst src%, dist%, $@) 
+	$(CC_C) -g -c $< -o $(patsubst src%, dist%, $@) 
+%.o: %.cpp 
+	$(CC_CPP) -g -c $< -o $(patsubst src%, dist%, $@) 
 .PHONY:
 	clean
 clean:

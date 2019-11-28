@@ -2,10 +2,10 @@
 
 LinkListNode *createLinklistNode(int val)
 {
-    LinkListNode *new = (LinkListNode *)malloc(sizeof(LinkListNode));
-    new->next = NULL;
-    new->val = val;
-    return new;
+    LinkListNode *newNode = (LinkListNode *)malloc(sizeof(LinkListNode));
+    newNode->next = NULL;
+    newNode->val = val;
+    return newNode;
 }
 /**
  * 打印链表
@@ -27,9 +27,9 @@ void printLinkList(LinkListNode *head)
  */
 LinkListNode *headInsert(LinkListNode *head, int val)
 {
-    LinkListNode *new = createLinklistNode(val);
-    new->next = head;
-    return new;
+    LinkListNode *newNode = createLinklistNode(val);
+    newNode->next = head;
+    return newNode;
 }
 
 /**
@@ -39,16 +39,16 @@ LinkListNode *headInsert(LinkListNode *head, int val)
  */
 LinkListNode *tailInsert(LinkListNode *head, int val)
 {
-    LinkListNode *new = createLinklistNode(val);
+    LinkListNode *newNode = createLinklistNode(val);
     LinkListNode *temp = head;
     if (head == NULL)
-        return new;
+        return newNode;
     while (temp->next != NULL)
     {
         temp = temp->next;
     }
 
-    temp->next = new;
+    temp->next = newNode;
     return head;
 }
 
@@ -117,7 +117,7 @@ LinkListNode *creatSortedLinklist(int len)
  */
 LinkListNode *insertSortedLinklist(LinkListNode *head, int val)
 {
-    LinkListNode *newNode = createLinklistNode(val);
+    LinkListNode *newNodeNode = createLinklistNode(val);
     LinkListNode *tempHead = createLinklistNode(-__INT_MAX__); // 虚拟头结点
     tempHead->next = head;                                     //指向原头结点
     LinkListNode *temp = tempHead;
@@ -127,8 +127,8 @@ LinkListNode *insertSortedLinklist(LinkListNode *head, int val)
         temp = temp->next;
     }
     // 插入
-    newNode->next = temp->next;
-    temp->next = newNode;
+    newNodeNode->next = temp->next;
+    temp->next = newNodeNode;
     // 返回临时结点的下一个结点，因为头结点可能会变动
     return tempHead->next;
 }
