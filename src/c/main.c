@@ -2,11 +2,10 @@
 #include "sort/util.h"
 #include "data-structure/linklist.h"
 #include <stdio.h>
-
 int main(int argc, char const *argv[])
 {
-    int len = 10000;
-    int times = 10;
+    int len = 1;
+    int times = 1;
     srand(time(0));
     printf("=========== [数据结构 - 开始运行] ===========\n");
     printf("----------- [数    组 - 开始运行] -----------\n");

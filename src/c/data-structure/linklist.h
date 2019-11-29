@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+typedef int ElemType;
 /**
  * 链表数据结构 
  */
 typedef struct LinkListNode
 {
-    int val;
+    ElemType val;
     struct LinkListNode *next;
 } LinkListNode;
 

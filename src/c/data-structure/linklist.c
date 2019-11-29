@@ -1,6 +1,6 @@
 #include "linklist.h"
-
-LinkListNode *createLinklistNode(int val)
+typedef int ElemType;
+LinkListNode *createLinklistNode(ElemType val)
 {
     LinkListNode *newNode = (LinkListNode *)malloc(sizeof(LinkListNode));
     newNode->next = NULL;
@@ -25,7 +25,7 @@ void printLinkList(LinkListNode *head)
  * 循环操作
  * 缺点是需要判断头结点为空
  */
-LinkListNode *headInsert(LinkListNode *head, int val)
+LinkListNode *headInsert(LinkListNode *head, ElemType val)
 {
     LinkListNode *newNode = createLinklistNode(val);
     newNode->next = head;
@@ -37,7 +37,7 @@ LinkListNode *headInsert(LinkListNode *head, int val)
  * 循环操作
  * 缺点是需要判断头结点为空
  */
-LinkListNode *tailInsert(LinkListNode *head, int val)
+LinkListNode *tailInsert(LinkListNode *head, ElemType val)
 {
     LinkListNode *newNode = createLinklistNode(val);
     LinkListNode *temp = head;
@@ -55,7 +55,7 @@ LinkListNode *tailInsert(LinkListNode *head, int val)
 /**
  * 递归尾部插入
  */
-LinkListNode *tailInsertRecursion(LinkListNode *head, int val)
+LinkListNode *tailInsertRecursion(LinkListNode *head, ElemType val)
 {
     if (head == NULL)
         return createLinklistNode(val);
@@ -96,7 +96,7 @@ LinkListNode *createRandomLinklist(int len)
  */
 LinkListNode *creatSortedLinklist(int len)
 {
-    int val = rand() % 10;
+    ElemType val = rand() % 10;
     if (len <= 0)
     {
         return NULL;
@@ -115,7 +115,7 @@ LinkListNode *creatSortedLinklist(int len)
  * 构造一个虚拟头结点，值为最小值。
  * 这样就可以将头部插入情况转换为中间插入情况，且无需考虑空链表插入。
  */
-LinkListNode *insertSortedLinklist(LinkListNode *head, int val)
+LinkListNode *insertSortedLinklist(LinkListNode *head, ElemType val)
 {
     LinkListNode *newNodeNode = createLinklistNode(val);
     LinkListNode *tempHead = createLinklistNode(-__INT_MAX__); // 虚拟头结点
