@@ -2,22 +2,25 @@
 
 ## 简介
 
-各种算法的实现（C/C++语言版本）
+各种数据结构、算法的实现（C/C++语言版本）
 
-目前编写了在linux环境下，适用于clang编译器的makefile文件。
+目前编写了在linux环境下，适用于clang/clang++编译器的makefile文件。
+
+所有数据结构或算法原想通过C语言实现。
+
+但由于C语言并无对泛型的支持，在几种高级算法、数据结构中，需要重复实现几种基本数据结构，不易维护，因此部分算法和数据结构采用C++实现，调用了C++标准模板库（STL）。
 
 ## 打开方式
 
-```bash
-#在项目根目录执行下列bash脚本即可运行
-mkdir dist dist/data-structure dist/sort
-make
-./dist/c-algorithm
+``` bash
+make                    # 在项目根目录执行下列bash脚本即可运行
+./dist/c-algorithm      # 运行c程序测试
+./dist/cpp-algorithm    # 运行c++程序测试
 ```
 
 ## 目录
 
-### 排序
+### 排序（C语言实现）
 
 - 冒泡排序
 - 选择排序

@@ -22,18 +22,18 @@ CC_CPP = clang++
 all: $(TARGET_C) $(TARGET_CPP)
 
 $(TARGET_C): $(OBJS_C)
-	$(CC_C) -g $(OUT_C) -o $(OUTDIR)/$(TARGET_C)
+	$(CC_C) -g $(OUT_C) -O3 -o $(OUTDIR)/$(TARGET_C)
 %.o: %.c makedir
-	$(CC_C) -g -c $< -o $(patsubst src%, dist%, $@) 
+	$(CC_C) -g -c $< -O3 -o $(patsubst src%, dist%, $@) 
 
 $(TARGET_CPP): $(OBJS_CPP)  
-	$(CC_CPP) -g $(OUT_CPP) -o $(OUTDIR)/$(TARGET_CPP)
+	$(CC_CPP) -g $(OUT_CPP) -O3 -o $(OUTDIR)/$(TARGET_CPP)
 %.o: %.cpp makedir
-	$(CC_CPP) -g -c $< -o $(patsubst src%, dist%, $@) 
+	$(CC_CPP) -g -c $< -O3 -o $(patsubst src%, dist%, $@) 
 
 .PHONY:
 	clean makedir
-makedir:
+makedir: 
 	$(foreach DIR, $(DIST_DIRS), $(shell mkdir "$(DIR)"))
 clean:
 	rm -rf $(OUTDIR)/$(obj) $(OUTDIR)/$(target)
