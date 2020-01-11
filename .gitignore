@@ -53,4 +53,4 @@ dkms.conf
 *.
 
 .vscode/
-dist/
+bin/
