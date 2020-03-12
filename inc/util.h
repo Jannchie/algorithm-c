@@ -30,14 +30,6 @@ int isAsc(int *a, int len)
     return 1;
 }
 
-void getRandomArray(int *a, int len)
-{
-    srand(rand());
-    for (int i = 0; i < len; i++)
-    {
-        a[i] = rand();
-    }
-}
 void getSortedArray(int *a, int len)
 {
     for (int i = 0; i < len; i++)
@@ -45,25 +37,64 @@ void getSortedArray(int *a, int len)
         a[i] = i + 1;
     }
 }
+/**
+ * 费空间
+ */
+void getRandomArray(int *a, int len)
+{
+    getSortedArray(a, len);
+    for (int i = 0; i < len; i++)
+    {
+        a[i] = rand();
+    }
+}
+
+void shuffle(int *a, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        int j = rand() % (len - i);
+        swap(&a[i], &a[i + j]);
+    }
+}
+
+void getShuffledArray(int *a, int len)
+{
+    getSortedArray(a, len);
+    shuffle(a, len);
+}
 
 void runSort(char const name[], void (*sortFunction)(int[], int), int len, int times)
 {
-    // printf("[INFO]\t\t\"%s\" started\n");
     int a[len];
 
     clock_t start, end;
     start = clock();
-
+    int result = 1;
     while (times--)
     {
-        getRandomArray(a, len);
+        getShuffledArray(a, len);
+        if (len < 20 && times == 0)
+        {
+            printf("排序前：");
+            printArray(a, len);
+        }
         // 执行排序算法
         sortFunction(a, len);
+        if (len < 20 && times == 0)
+        {
+            printf("排序后：");
+            printArray(a, len);
+        }
+        if (!isAsc(a, len))
+        {
+            result = 0;
+        };
     }
 
     end = clock();
     char state[20] = "";
-    strcpy(state, isAsc(a, len) ? "\033[0;32m[ √ ]\033[0m" : "\033[0;31m[ × ]\033[0m");
+    strcpy(state, result ? "\033[0;32m[ √ ]\033[0m" : "\033[0;31m[ × ]\033[0m");
 
     printf("[%s]\tUSED TIME = %fs\t%s\n", name, (double)(end - start) / CLOCKS_PER_SEC, state);
 }
