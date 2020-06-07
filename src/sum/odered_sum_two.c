@@ -1,7 +1,7 @@
 
 #include "util.h"
 
-int sumTwo(int *a, int len, int target)
+int twoSum(int *a, int len, int target)
 {
     int i = 0;
     int j = len - 1;
@@ -33,8 +33,8 @@ int main(int argc, char const *argv[])
     int *a = malloc(sizeof(int) * n);
     initArrayWithOrder(a, n);
     printArray(a, n);
-    sumTwo(a, n, 5);
-    sumTwo(a, n, 19);
-    sumTwo(a, n, 20);
+    twoSum(a, n, 5);
+    twoSum(a, n, 19);
+    twoSum(a, n, 20);
     return 0;
 }
