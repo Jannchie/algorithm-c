@@ -30,7 +30,7 @@ int isAsc(int *a, int len)
     return 1;
 }
 
-void getSortedArray(int *a, int len)
+void initArrayWithOrder(int *a, int len)
 {
     for (int i = 0; i < len; i++)
     {
@@ -40,9 +40,9 @@ void getSortedArray(int *a, int len)
 /**
  * 费空间
  */
-void getRandomArray(int *a, int len)
+void randomArray(int *a, int len)
 {
-    getSortedArray(a, len);
+    initArrayWithOrder(a, len);
     for (int i = 0; i < len; i++)
     {
         a[i] = rand();
@@ -58,22 +58,23 @@ void shuffle(int *a, int len)
     }
 }
 
-void getShuffledArray(int *a, int len)
+int *getShuffledArray(int len)
 {
-    getSortedArray(a, len);
+    int *a = malloc(sizeof(int) * len);
+    initArrayWithOrder(a, len);
     shuffle(a, len);
+    return a;
 }
 
 void runSort(char const name[], void (*sortFunction)(int[], int), int len, int times)
 {
-    int a[len];
 
     clock_t start, end;
     start = clock();
     int result = 1;
     while (times--)
     {
-        getShuffledArray(a, len);
+        int *a = getShuffledArray(len);
         if (len < 20 && times == 0)
         {
             printf("排序前：");
