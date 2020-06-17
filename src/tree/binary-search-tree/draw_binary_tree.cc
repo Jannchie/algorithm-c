@@ -1,6 +1,5 @@
 #include "tree.h"
 #include <queue>
-#include <array>
 using namespace std;
 
 int max_depth(struct TreeNode *root)
@@ -84,8 +83,6 @@ void draw_binary_tree(struct TreeNode *root)
 
         for (int layer_size = q.size(); layer_size > 0; layer_size--)
         {
-            int len = pow(2, depth - 1);
-
             struct TreeNode *c_node = q.front();
             q.pop();
             if (!c_node)
@@ -211,7 +208,7 @@ void draw_binary_tree(struct TreeNode *root)
 
 int main(int argc, char const *argv[])
 {
-    struct TreeNode *root = create_binary_search_tree(12);
+    struct TreeNode *root = create_binary_search_tree(10);
     draw_binary_tree(root);
     return 0;
 }
