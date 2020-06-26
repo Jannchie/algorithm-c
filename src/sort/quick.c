@@ -1,9 +1,9 @@
 #include "util.h"
-void sort(int arr[], int l, int r)
+void sort(int arr[], int first, int last)
 {
-    if(l > r)
+    if (first > last)
         return;
-    int i = l, j = r;
+    int i = first, j = last;
     int pivot = arr[i];
     while (i < j)
     {
@@ -11,22 +11,16 @@ void sort(int arr[], int l, int r)
         {
             j--;
         }
-        if (i < j)
-        {
-            arr[i++] = arr[j];
-        }
+        arr[i] = arr[j];
         while (i < j && arr[i] < pivot)
         {
             i++;
         }
-        if (i < j)
-        {
-            arr[j--] = arr[i];
-        }
+        arr[j] = arr[i];
     }
     arr[i] = pivot;
-    sort(arr, l, i - 1);
-    sort(arr, i + 1, r);
+    sort(arr, first, i - 1);
+    sort(arr, i + 1, last);
 }
 
 void quickSort(int arr[], int n)

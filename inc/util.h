@@ -60,7 +60,7 @@ void shuffle(int *a, int len)
 
 int *getShuffledArray(int len)
 {
-    int *a = malloc(sizeof(int) * len);
+    int *a = (int *)malloc(sizeof(int) * len);
     initArrayWithOrder(a, len);
     shuffle(a, len);
     return a;
@@ -70,11 +70,11 @@ void runSort(char const name[], void (*sortFunction)(int[], int), int len, int t
 {
 
     clock_t start, end;
-    start = clock();
     int result = 1;
+    start = clock();
+    int *a = getShuffledArray(len);
     while (times--)
     {
-        int *a = getShuffledArray(len);
         if (len < 20 && times == 0)
         {
             printf("排序前：");

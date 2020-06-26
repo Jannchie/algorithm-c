@@ -208,7 +208,7 @@ void draw_binary_tree(struct TreeNode *root)
 
 int main(int argc, char const *argv[])
 {
-    struct TreeNode *root = create_binary_search_tree(10);
+    struct TreeNode *root = create_binary_search_tree(9);
     draw_binary_tree(root);
     return 0;
 }

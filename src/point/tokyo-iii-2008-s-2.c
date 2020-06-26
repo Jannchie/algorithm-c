@@ -1,9 +1,12 @@
+/**
+ * 考察指针
+ */
 #include <stdio.h>
 
 int f(int *i, int *j)
 {
     *i += 4 + *j;
-    printf("%d,%d\n", *i, *j); 
+    printf("%d,%d\n", *i, *j);
     return *i + *j;
 }
 

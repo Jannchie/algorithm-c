@@ -65,8 +65,8 @@ void heapSort(int arr[], int len)
 
 int main()
 {
-  int n = 10;
-  int times = 1;
+  int n = 1000;
+  int times = 1000;
   runSort("heap sort", heapSort, n, times);
   return 0;
 }
