@@ -25,11 +25,11 @@ struct ListNode *reverseList_iteratively(struct ListNode *head)
 }
 int main(int argc, char const *argv[])
 {
-    struct ListNode *head = NULL;
-    head = list_insert_2(head, 2);
-    head = list_insert_2(head, 3);
-    head = list_insert_2(head, 1);
+    struct ListNode *head = gen_list(10);
     print_list(head);
-    // struct ListNode *head = gen_list(10);
+    head = reverseList_iteratively(head);
+    print_list(head);
+    head = reverseList_recursively(head);
+    print_list(head);
     return 0;
 }
