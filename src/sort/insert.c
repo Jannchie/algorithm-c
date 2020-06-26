@@ -1,23 +1,32 @@
 #include "util.h"
-void insertSort(int arr[], int n)
+void insert_sort_1(int a[], int n)
 {
     for (int i = 1; i < n; i++)
     {
-        if (arr[i] < arr[i - 1])
+        int temp = a[i], j;
+        for (j = i; j > 0 && a[j - 1] > temp; j--)
         {
-            int temp = arr[i],j;
-            for (j = i - 1; j > 0 && arr[j] > temp; j--)
-            {
-                arr[j + 1] = arr[j];
-            }
-            arr[j] = temp;
+            a[j] = a[j - 1];
         }
+        a[j] = temp;
+    }
+}
+void insert_sort_2(int a[], int n)
+{
+    for (int i = 1; i < n; i++)
+    {
+        int temp = a[i], j = i;
+        while (j > 0 && a[j - 1] > temp)
+        {
+            a[j--] = a[j - 1];
+        }
+        a[j] = temp;
     }
 }
 int main(int argc, char const *argv[])
 {
     int n = 1000;
     int times = 1000;
-    runSort("insert sort", insertSort, n, times);
+    runSort("insert sort", insert_sort_2, n, times);
     return 0;
 }
