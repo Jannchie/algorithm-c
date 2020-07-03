@@ -3,11 +3,13 @@ void shell_sort(int a[], int n)
 {
     int i, j, k;
     int temp;
-    for (k = n / 2; k > 0; k /= 2)
+    // >>: 右移，表示除以2
+    for (k = n >> 1; k > 0; k >>= 2)
     {
         for (i = k; i < n; i++)
         {
-            for (j = i; j > k && temp < a[j - k]; j -= k)
+            temp = a[i];
+            for (j = i; j >= k && temp < a[j - k]; j -= k)
             {
                 a[j] = a[j - k];
             }
