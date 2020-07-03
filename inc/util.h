@@ -72,9 +72,9 @@ void runSort(char const name[], void (*sortFunction)(int[], int), int len, int t
     clock_t start, end;
     int result = 1;
     start = clock();
-    int *a = getShuffledArray(len);
     while (times--)
     {
+        int *a = getShuffledArray(len);
         if (len < 20 && times == 0)
         {
             printf("排序前：");
