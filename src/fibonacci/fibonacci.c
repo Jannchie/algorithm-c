@@ -1,7 +1,7 @@
 #include <stdio.h>
 int fib(int N)
 {
-    int p = 0, q = 1, r = 1;
+    long p = 0, q = 1, r = 1;
     while (N--)
     {
         p = q;
@@ -13,7 +13,7 @@ int fib(int N)
 
 int main(int argc, char const *argv[])
 {
-    for (int n = 0; n <= 32; n++)
+    for (int n = 0; n <= 88; n++)
     {
         printf("Fibonacci number: f(%d) is %d\n", n, fib(n));
     }
