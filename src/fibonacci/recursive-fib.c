@@ -28,7 +28,7 @@ int fib(int n)
 int fib_2(int n)
 {
 
-    return n < 1 ? 0 : n == 1 ? 1 : fib_2(n - 2) + fib_2(n - 1);
+    return n <= 1 ? n : fib_2(n - 2) + fib_2(n - 1);
 }
 
 int main(int argc, char const *argv[])
