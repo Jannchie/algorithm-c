@@ -1,4 +1,7 @@
 #include <util.h>
+/**
+ *  链表节点数据结构 
+ */
 struct ListNode
 {
     int val;
