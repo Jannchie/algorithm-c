@@ -3,8 +3,9 @@
 using namespace std;
 void draw_binary_tree(struct TreeNode *root)
 {
+    if (root == NULL)
+        return;
     queue<struct TreeNode *> q;
-
     q.push(root);
     while (!q.empty())
     {
