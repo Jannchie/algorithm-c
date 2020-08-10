@@ -1,5 +1,6 @@
 #include "graph.h"
 #include <queue>
+#include <stack>
 using namespace std;
 
 struct GraphWithMatrix *init_graph(int n)
@@ -16,7 +17,35 @@ struct GraphWithMatrix *init_graph(int n)
     add_edge(6, 3, g);
     return g;
 }
-
+void dfs(struct GraphWithMatrix *g, int n, int start, int *v)
+{
+    if (v[start])
+    {
+        return;
+    }
+    v[start] = true;
+    for (int i = 0; i < n; i++)
+    {
+        if (g->edge[start][i] == 1)
+        {
+            dfs(g, n, i, v);
+        }
+    }
+    printf("%d\n", start);
+}
+void top_sort_with_dfs(struct GraphWithMatrix *g, int n)
+{
+    int *v = (int *)malloc(sizeof(int) * n);
+    std::stack<int> s;
+    std::stack<int> o;
+    for (int i = 0; i < n; i++)
+    {
+        if (!v[i])
+        {
+            dfs(g, n, i, v);
+        }
+    }
+}
 void top_sort(struct GraphWithMatrix *g, int n)
 {
     std::queue<int> q;
@@ -54,15 +83,16 @@ void top_sort(struct GraphWithMatrix *g, int n)
         }
     }
     if (count == n)
-        printf("succeed!");
+        printf("succeed!\n");
     else
-        printf("failed!");
+        printf("failed!\n");
 }
 
 int main(int argc, char const *argv[])
 {
     int n = 8;
     top_sort(init_graph(n), n);
+    top_sort_with_dfs(init_graph(n), n);
     printf("\n");
     return 0;
 }
