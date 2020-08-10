@@ -1,66 +1,68 @@
-#include <iostream>
-#include <list>
+#include "graph.h"
 #include <queue>
 using namespace std;
 
-class Graph
+struct GraphWithMatrix *init_graph(int n)
 {
-    int V;          // 顶点个数
-    list<int> *adj; // 邻接表
-    queue<int> q;   // 维护一个入度为0的顶点的集合
-    int *indegree;  // 记录每个顶点的入度
-public:
-    Graph(int V);               // 构造函数
-    ~Graph();                   // 析构函数
-    void addEdge(int v, int w); // 添加边
-    bool topological_sort();    // 拓扑排序
-};
-
-Graph::Graph(int V)
-{
-    this->V = V;
-    adj = new list<int>[V];
-
-    indegree = new int[V]; // 入度全部初始化为0
-    for (int i = 0; i < V; ++i)
-        indegree[i] = 0;
+    struct GraphWithMatrix *g = create_empty_with_matrix(n);
+    add_edge(7, 1, g);
+    add_edge(0, 1, g);
+    add_edge(0, 2, g);
+    add_edge(2, 4, g);
+    add_edge(4, 6, g);
+    add_edge(3, 5, g);
+    add_edge(1, 3, g);
+    add_edge(1, 4, g);
+    add_edge(6, 3, g);
+    return g;
 }
 
-Graph::~Graph()
+void top_sort(struct GraphWithMatrix *g, int n)
 {
-    delete[] adj;
-    delete[] indegree;
-}
-
-void Graph::addEdge(int v, int w)
-{
-    adj[v].push_back(w);
-    ++indegree[w];
-}
-
-bool Graph::topological_sort()
-{
-    for (int i = 0; i < V; ++i)
-        if (indegree[i] == 0)
-            q.push(i); // 将所有入度为0的顶点入队
-
-    int count = 0; // 计数，记录当前已经输出的顶点数
+    std::queue<int> q;
+    int *indgree = (int *)malloc(sizeof(int) * n);
+    // indgree calculate
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (g->edge[j][i] == 1)
+            {
+                indgree[i] += 1;
+            }
+        }
+        if (indgree[i] == 0)
+            q.push(i);
+    }
+    int count = 0;
     while (!q.empty())
     {
-        int v = q.front(); // 从队列中取出一个顶点
+        int i = q.front();
+        printf("%d ", i);
         q.pop();
-
-        cout << v << " "; // 输出该顶点
-        ++count;
-        // 将所有v指向的顶点的入度减1，并将入度减为0的顶点入栈
-        list<int>::iterator beg = adj[v].begin();
-        for (; beg != adj[v].end(); ++beg)
-            if (!(--indegree[*beg]))
-                q.push(*beg); // 若入度为0，则入栈
+        count++;
+        for (int j = 0; j < n; j++)
+        {
+            if (g->edge[i][j] == 1)
+            {
+                indgree[j] -= 1;
+                if (indgree[j] == 0)
+                {
+                    q.push(j);
+                }
+            }
+        }
     }
-
-    if (count < V)
-        return false; // 没有输出全部顶点，有向图中有回路
+    if (count == n)
+        printf("succeed!");
     else
-        return true; // 拓扑排序成功
+        printf("failed!");
+}
+
+int main(int argc, char const *argv[])
+{
+    int n = 8;
+    top_sort(init_graph(n), n);
+    printf("\n");
+    return 0;
 }
