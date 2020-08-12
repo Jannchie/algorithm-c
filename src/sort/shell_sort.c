@@ -6,7 +6,7 @@ void shell_sort(int a[], int n)
     // >>: 右移，表示除以2
     for (k = n >> 1; k > 0; k >>= 2)
     {
-        for (i = k; i < n; i++)
+        for (i = k; i < n; i += k)
         {
             temp = a[i];
             for (j = i; j >= k && temp < a[j - k]; j -= k)
