@@ -1,71 +1,95 @@
-#include <bits/stdc++.h>
 using namespace std;
-#define INF 0x3f3f3f3f
+#define INF 9999
+#include "util.h"
+const int n = 6;
+int g[n][n];
 
-// iPair ==> Integer Pair（整数对）
-typedef pair<int, int> iPair;
-
-// 加边
-void addEdge(vector<pair<int, int>> adj[], int u,
-             int v, int wt)
+int add_edge(int from, int to, int w)
 {
-    adj[u].push_back(make_pair(v, wt));
-    adj[v].push_back(make_pair(u, wt));
+    g[from][to] = w;
+    g[to][from] = w;
 }
 
-// 计算最短路
-void shortestPath(vector<pair<int, int>> adj[], int V, int src)
+int init(int g[n][n])
 {
-    // 关于stl中的优先队列如何实现，参考下方网址：
-    // http://geeksquiz.com/implement-min-heap-using-stl/
-    priority_queue<iPair, vector<iPair>, greater<iPair>> pq;
-
-    // 距离置为正无穷大
-    vector<int> dist(V, INF);
-
-    // 插入源点，距离为0
-    pq.push(make_pair(0, src));
-    dist[src] = 0;
-
-    /* 循环直到优先队列为空 */
-    while (!pq.empty())
+    for (int i = 0; i < n; i++)
     {
-        // 每次从优先队列中取出顶点事实上是这一轮最短路径权值确定的点
-        int u = pq.top().second;
-        pq.pop();
-        printf("OUT (%d,%d)\n", dist[u], u);
-        // 遍历所有边
-        for (auto x : adj[u])
+        for (int j = 0; j < n; j++)
         {
-            // 得到顶点边号以及边权
-            int v = x.first;
-            int weight = x.second;
+            g[i][j] = i == j ? 0 : INF;
+        }
+    }
+    add_edge(0, 1, 1);
+    add_edge(0, 2, 3);
+    add_edge(1, 3, 1);
+    add_edge(2, 3, 2);
+    add_edge(3, 5, 6);
+    add_edge(2, 4, 1);
+    add_edge(4, 5, 1);
+    add_edge(1, 5, 1);
+}
 
-            //可以松弛
-            if (dist[v] > dist[u] + weight)
+// 負の重みはないのグラフ
+// 時間計算量は　O(|V|^2),優先度付きキューを利用して、O(|V|log|V|)の時間計算量になることができる。
+void dijkstra(int start)
+{
+    int d[n];
+    int v[n];
+    int p[n];
+    // O(n)
+    for (int i = 0; i < n; i++)
+    {
+        d[i] = INF;
+        v[i] = 0;
+        p[i] = start;
+    }
+    int c = start;
+    d[start] = 0;
+    // O(n)
+    for (int a = 0; a < n; a++)
+    {
+        v[c] = 1;
+        // Release
+        // 邻接矩阵： O(n) (邻接表： O(E))
+        for (int i = 0; i < n; i++)
+        {
+            if (d[c] + g[c][i] < d[i])
             {
-                // 松弛
-                dist[v] = dist[u] + weight;
-                pq.push(make_pair(dist[v], v));
-                printf("IN (%d,%d)\n", dist[v], v);
+                d[i] = d[c] + g[c][i];
+                p[i] = c;
+            }
+        }
+        // O(n)
+        // Find min
+        int min = INF;
+        for (int i = 0; i < n; i++)
+        {
+
+            if (v[i] == 0 && d[i] < min)
+            {
+                c = i;
+                min = d[i];
             }
         }
     }
-
-    // 打印最短路
-    printf("Vertex Distance from Source\n");
-    for (int i = 0; i < V; ++i)
-        printf("%d \t\t %d\n", i, dist[i]);
+    printArray(d, n);
+    printArray(v, n);
+    printArray(p, n);
+    for (int i = 1; i < n; i++)
+    {
+        int c = i;
+        do
+        {
+            printf("%d < ", c);
+            c = p[c];
+        } while (c != start);
+        printf("0 \n");
+    }
 }
+
 int main()
 {
-    int V = 5;
-    vector<iPair> adj[V];
-    addEdge(adj, 1, 2, 1);
-    addEdge(adj, 2, 4, 2);
-    addEdge(adj, 1, 4, 4);
-    addEdge(adj, 2, 3, 5);
-    addEdge(adj, 3, 4, 1);
-    shortestPath(adj, V, 1);
+    init(g);
+    dijkstra(0);
     return 0;
 }
