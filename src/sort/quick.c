@@ -7,7 +7,7 @@ void sort(int arr[], int first, int last)
     int pivot = arr[i];
     while (i < j)
     {
-        while (i < j && arr[j] > pivot)
+        while (i < j && arr[j] >= pivot)
         {
             j--;
         }
